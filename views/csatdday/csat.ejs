@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>2021 수능 카운터!</title>
+<link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
+<style type="text/css">
+    @import url(http://fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+    #csatcnt {width:800px;margin:0 auto;padding:100px 0 0 0; text-align:center;font-size:20px;font-family:'Jeju Myeongjo', serif;background-position:center center;background-size: 800px;}
+    .alert {color:red;background-color:black;}
+    .num {font-size:50px;font-family: 'Share Tech Mono', monospace;}
+    #counter-wrapper {
+	background: white;
+	opacity: 60%;
+	height: 120px;
+	width: 550px;
+	margin-left:auto;
+	margin-right: auto;
+	border-color: black;
+	border-width: 5px;
+	border-radius: 10px;
+    }
+    #counter {
+	padding-top: 32px;
+    }
+</style>
+</head>
+<body>
+<div id = "csatcnt">
+    <span class="text_target"><b>2021학년도 대학수학능력시험 카운트다운</b></span><br><br>
+    <span id="dday-timer" class="alert">javascript 오류!</span>
+    <div id="counter-wrapper">
+	<div id="counter">
+	<span id="time-d1" class="num">0</span>
+	<span id="time-d2" class="num">0</span>
+	<span id="time-d3" class="num">0</span>
+	<span class="txt">:</span>
+	<span id="time-hr1" class="num">0</span>
+	<span id="time-hr2" class="num">0</span>
+	<span class="txt">:</span>
+	<span id="time-min1" class="num">0</span>
+	<span id="time-min2" class="num">0</span>
+	<span class="txt">:</span>
+	<span id="time-sec1" class="num">0</span>
+	<span id="time-sec2" class="num">0</span>
+	<span class="txt">:</span>
+	<span id="time-mili1" class="num">0</span>
+	<span id="time-mili2" class="num">0</span>
+	<span id="time-mili3" class="num">0</span>
+	</div>
+    </div><br><br><br><br><br><br>
+</div>
+
+<script type="text/javascript">
+var ddaytimer = setInterval (dayGap, 1)
+function dayGap () {
+    var dday = new Date("Nov 19, 2020 08:10:00");//디데이
+    var ddayChange = dday.getTime();
+    var nowday = new Date();//현재
+    nowday = nowday.getTime();//밀리세컨드 단위변환
+    var dateleft = ddayChange - nowday;//디데이에서 현재까지 뺀다.
+    var d = 0, d1 = 0, d2 = 0, d3 = 0, h1 = 0, h2 = 0, m1 = 0, m2 = 0, s1 = 0, s2 = 0, ms1 = 0, ms2 = 0, ms3 = 0;
+    if (dateleft <= 0) {
+        document.getElementById("dday-timer").innerHTML = "수험생 여러분들 수고하셨습니다<br>";
+        document.getElementById("csatcnt").style.backgroundImage = "url(csatdday/sky.jpg)"
+    }else {
+    d = Math.floor(dateleft / (1000 * 60 * 60 * 24));//day
+    d1 = Math.floor((dateleft / (1000 * 60 * 60 * 24)) / 100);//100d
+    d2 = Math.floor(((dateleft / (1000 * 60 * 60 * 24)) / 10) % 10);//10d
+    d3 = Math.floor((dateleft / (1000 * 60 * 60 * 24)) % 10);//1d
+    h1 = Math.floor(((dateleft / (1000*60*60)) % 24) / 10);//10h
+    h2 = Math.floor(((dateleft / (1000*60*60)) % 24) % 10);//1h
+    m1 = Math.floor(((dateleft / (1000*60)) % 60) / 10);//10m
+    m2 = Math.floor(((dateleft / (1000*60)) % 60) % 10);//1m
+    s1 = Math.floor(((dateleft / 1000) % 60) / 10);//10s
+    s2 = Math.floor(((dateleft / 1000) % 60) % 10);//1s
+    ms1 = Math.floor((dateleft % 1000)/100);//1/10s
+    ms2 = Math.floor((dateleft % 100)/10);//1/100s
+    ms3 = Math.floor(dateleft % 10);//milisec
+    }
+    if (d <= 100 && d > 0) {
+        document.getElementById("dday-timer").innerHTML = "수능까지 100일도 안남았다<br>";
+        document.getElementById("csatcnt").style.backgroundImage = "url(/csatdday/sky1.jpg)";
+    }else {
+        document.getElementById("dday-timer").innerHTML = "<br>";
+        document.getElementById("csatcnt").style.backgroundImage = "url(/csatdday/sky.jpg)";
+    }
+        document.getElementById("time-d1").innerHTML = d1;
+        document.getElementById("time-d2").innerHTML = d2;
+        document.getElementById("time-d3").innerHTML = d3;
+        document.getElementById("time-hr1").innerHTML = h1;
+        document.getElementById("time-hr2").innerHTML = h2;
+        document.getElementById("time-min1").innerHTML = m1;
+        document.getElementById("time-min2").innerHTML = m2;
+        document.getElementById("time-sec1").innerHTML = s1;
+        document.getElementById("time-sec2").innerHTML = s2;
+        document.getElementById("time-mili1").innerHTML = ms1;
+        document.getElementById("time-mili2").innerHTML = ms2;
+        document.getElementById("time-mili3").innerHTML = ms3;
+}
+
+var audio = new Audio();
+audio.src = "/csatdday/happysky.mp3";
+
+var playPromise = audio.play();
+
+  if (playPromise !== undefined) {
+    playPromise.then(_ => {
+      // Automatic playback started!
+      // Show playing UI.
+    })
+    .catch(error => {
+      // Auto-play was prevented
+      // Show paused UI.
+    });
+  }
+
+</script>
+</body>
+</html>
