@@ -133,11 +133,13 @@
             </div>
             <div class="tab-pane fade" id="notes">
                 <div class="notes_box">
+		<% for(var i = 0; i < data.length; i++) {%>
                     <hr>
-                    화이팅
+                    <%=data[i].content%>
+		<% } %>
                     <hr>
                     <form class="inputnote" action="http://h2f.kr/html-story/writenote" method="post">
-                        <textarea class="comment form-control"></textarea>
+                        <textarea name="comment" class="comment form-control"></textarea>
                         <button class="submit btn btn-dark">작성</button>
                     </form>
                 </div>

@@ -1,5 +1,9 @@
 var express = require('express');
+var bodyparser = require('body-parser');
 var app = express();
+app.use(bodyparser.urlencoded({
+    extended: true
+}));
 var mysql = require('mysql');
 var dbconfig = require('./config/dbconfig');
 var port = 80;

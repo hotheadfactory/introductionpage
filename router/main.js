@@ -22,6 +22,18 @@ module.exports = function(app)
            }
            })
         })
-
+    })
+        
+	app.post('/html-story/writenote', (req, res) => {
+         pool.getConnection(function (err, connection) {
+            var sql = "INSERT INTO "+dbconfig.html_story_table+" (name, content, writetime)"+
+            " VALUES ('익명', ?, NOW());";
+            connection.query(sql, req.body.comment, function(err, data) {
+               if (err) { console.error("err : " + err);
+              } else {
+               res.redirect('/html-story/#notes');
+              }
+            })
+	 })
    });
 }
