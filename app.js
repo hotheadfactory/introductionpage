@@ -1,5 +1,7 @@
 var express = require('express');
 var app = express();
+var mysql = require('mysql');
+var dbconfig = require('./config/dbconfig');
 var port = 80;
 var router = require('./router/main')(app);
 
